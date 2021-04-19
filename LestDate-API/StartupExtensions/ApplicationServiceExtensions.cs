@@ -17,6 +17,16 @@ namespace LestDate_API.StartupExtensions
             services.AddDbContext<DataContext>(options =>
                 options.UseSqlServer(config.GetConnectionString("DefaultConnection")));
 
+            services.AddCors(opt =>
+            {
+                opt.AddPolicy("CorsPolicy", policy =>
+                {
+                    policy
+                        .AllowAnyMethod()
+                        .AllowAnyHeader()
+                        .WithOrigins("http://localhost:4200");
+                });
+            });
 
             services.AddSwaggerGen(c =>
             {
