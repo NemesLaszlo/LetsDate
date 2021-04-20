@@ -32,7 +32,7 @@ namespace LestDate_API.StartupExtensions
             });
 
             services.AddAutoMapper(typeof(AutoMapperProfiles).Assembly);
-            services.AddScoped<ITokenService, TokenService>();
+            services.AddScoped<ITokenService, TokenService>(); // http request lifetime - alived (scoped)
 
             services.AddSwaggerGen(c =>
             {

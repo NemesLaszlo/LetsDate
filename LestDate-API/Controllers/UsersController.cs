@@ -1,5 +1,6 @@
 ﻿using LestDate_API.Database;
 using LestDate_API.Entities;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -19,11 +20,12 @@ namespace LestDate_API.Controllers
             _context = context;
         }
 
+        [AllowAnonymous]
         [HttpGet]
         public async Task<ActionResult<IEnumerable<AppUser>>> GetUsers()
         {
             var users = await _context.Users.ToListAsync();
-            return Ok(users);
+            return users;
         }
 
         [HttpGet("{id}")]
