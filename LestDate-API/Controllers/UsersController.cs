@@ -10,9 +10,7 @@ using System.Threading.Tasks;
 
 namespace LestDate_API.Controllers
 {
-    [Route("api/[controller]")]
-    [ApiController]
-    public class UsersController : ControllerBase
+    public class UsersController : BaseApiController
     {
         private readonly DataContext _context;
 
@@ -25,14 +23,14 @@ namespace LestDate_API.Controllers
         public async Task<ActionResult<IEnumerable<AppUser>>> GetUsers()
         {
             var users = await _context.Users.ToListAsync();
-            return users;
+            return Ok(users);
         }
 
         [HttpGet("{id}")]
         public async Task<ActionResult<AppUser>> GetUsersById(int id)
         {
             var user = await _context.Users.FirstOrDefaultAsync(x => x.Id == id);
-            return user;
+            return Ok(user);
         }
     }
 }

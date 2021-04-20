@@ -1,4 +1,7 @@
 ﻿using LestDate_API.Database;
+using LestDate_API.Interfaces;
+using LestDate_API.MapperProfiles;
+using LestDate_API.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -27,6 +30,9 @@ namespace LestDate_API.StartupExtensions
                         .WithOrigins("http://localhost:4200");
                 });
             });
+
+            services.AddAutoMapper(typeof(AutoMapperProfiles).Assembly);
+            services.AddScoped<ITokenService, TokenService>();
 
             services.AddSwaggerGen(c =>
             {
