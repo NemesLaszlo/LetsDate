@@ -29,7 +29,8 @@ namespace LestDate_API.Database
 
             var admin = new AppUser
             {
-                UserName = "admin"
+                UserName = "admin",
+                Email = "admin@letsdate.com"
             };
 
             await userManager.CreateAsync(admin, "Pa$$w0rd");
