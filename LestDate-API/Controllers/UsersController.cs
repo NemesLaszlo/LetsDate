@@ -1,5 +1,6 @@
 ﻿using LestDate_API.Database;
 using LestDate_API.Entities;
+using LestDate_API.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -13,25 +14,25 @@ namespace LestDate_API.Controllers
 {
     public class UsersController : BaseApiController
     {
-        private readonly DataContext _context;
+        private readonly IUserRepository _userRepository;
 
-        public UsersController(DataContext context)
+        public UsersController(IUserRepository userRepository)
         {
-            _context = context;
+            _userRepository = userRepository;
         }
 
         [AllowAnonymous]
         [HttpGet]
         public async Task<ActionResult<IEnumerable<AppUser>>> GetUsers()
         {
-            var users = await _context.Users.ToListAsync();
-            return users;
+            var users = await _userRepository.GetUsersAsync();
+            return Ok(users);
         }
 
-        [HttpGet("{id}")]
-        public async Task<ActionResult<AppUser>> GetUsersById(int id)
+        [HttpGet("{username}")]
+        public async Task<ActionResult<AppUser>> GetUser(string username)
         {
-            var user = await _context.Users.FirstOrDefaultAsync(x => x.Id == id);
+            var user = await _userRepository.GetUserByUsernameAsync(username);
             return Ok(user);
         }
     }

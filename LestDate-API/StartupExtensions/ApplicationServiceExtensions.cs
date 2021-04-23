@@ -1,6 +1,7 @@
 ﻿using LestDate_API.Database;
 using LestDate_API.Interfaces;
 using LestDate_API.MapperProfiles;
+using LestDate_API.Repositories;
 using LestDate_API.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -33,6 +34,7 @@ namespace LestDate_API.StartupExtensions
 
             services.AddAutoMapper(typeof(AutoMapperProfiles).Assembly);
             services.AddScoped<ITokenService, TokenService>(); // http request lifetime - alived (scoped)
+            services.AddScoped<IUserRepository, UserRepository>();
 
             services.AddSwaggerGen(c =>
             {
