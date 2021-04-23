@@ -15,6 +15,10 @@ namespace LestDate_API.Database
         {
             if (await userManager.Users.AnyAsync()) return;
 
+            var userData = await System.IO.File.ReadAllTextAsync("Database/UserSeedData.json");
+            var users = JsonSerializer.Deserialize<List<AppUser>>(userData);
+            if (users == null) return;
+
             var roles = new List<AppRole>
             {
                 new AppRole{Name = "Member"},
@@ -25,6 +29,14 @@ namespace LestDate_API.Database
             foreach (var role in roles)
             {
                 await roleManager.CreateAsync(role);
+            }
+
+            foreach (var user in users)
+            {
+                user.UserName = user.UserName.ToLower();
+                user.Photos.First().IsApproved = true;
+                await userManager.CreateAsync(user, "Pa$$w0rd");
+                await userManager.AddToRoleAsync(user, "Member");
             }
 
             var admin = new AppUser
