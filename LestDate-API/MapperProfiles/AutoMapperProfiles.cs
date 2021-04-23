@@ -13,6 +13,7 @@ namespace LestDate_API.MapperProfiles
         public AutoMapperProfiles()
         {
             CreateMap<RegisterDto, AppUser>();
+            CreateMap<Photo, PhotoDto>();
         }
     }
 }

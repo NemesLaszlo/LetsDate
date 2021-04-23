@@ -111,6 +111,7 @@ namespace LestDate_API.Controllers
             if (!IsValidEmailAddress(loginDto.Email)) return Unauthorized("Invalid Email Form");
 
             var user = await _userManager.Users
+                .Include(p => p.Photos)
                 .SingleOrDefaultAsync(x => x.Email == loginDto.Email);
 
             if (user == null) return Unauthorized("Invalid Email");
@@ -125,7 +126,7 @@ namespace LestDate_API.Controllers
             {
                 Username = user.UserName,
                 Token = await _tokenService.CreateToken(user),
-                PhotoUrl = null,
+                PhotoUrl = user.Photos.FirstOrDefault(x => x.IsMain)?.Url,
                 KnownAs = user.KnownAs,
                 Gender = user.Gender
             };
@@ -135,6 +136,7 @@ namespace LestDate_API.Controllers
         public async Task<ActionResult<UserDto>> GetCurrentUser()
         {
             var user = await _userManager.Users
+                .Include(p => p.Photos)
                 .FirstOrDefaultAsync(x => x.Email == User.FindFirstValue(ClaimTypes.Email));
 
             await SetRefreshToken(user);
@@ -142,7 +144,7 @@ namespace LestDate_API.Controllers
             {
                 Username = user.UserName,
                 Token = await _tokenService.CreateToken(user),
-                PhotoUrl = null,
+                PhotoUrl = user.Photos.FirstOrDefault(x => x.IsMain)?.Url,
                 KnownAs = user.KnownAs,
                 Gender = user.Gender
             };
@@ -154,6 +156,7 @@ namespace LestDate_API.Controllers
             var refreshToken = Request.Cookies["refreshToken"];
             var user = await _userManager.Users
                 .Include(r => r.RefreshTokens)
+                .Include(p => p.Photos)
                 .FirstOrDefaultAsync(x => x.UserName == User.FindFirstValue(ClaimTypes.Name));
 
             if (user == null) return Unauthorized();
@@ -166,7 +169,7 @@ namespace LestDate_API.Controllers
             {
                 Username = user.UserName,
                 Token = await _tokenService.CreateToken(user),
-                PhotoUrl = null,
+                PhotoUrl = user.Photos.FirstOrDefault(x => x.IsMain)?.Url,
                 KnownAs = user.KnownAs,
                 Gender = user.Gender
             };
