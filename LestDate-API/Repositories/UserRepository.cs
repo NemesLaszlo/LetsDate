@@ -1,5 +1,7 @@
 ﻿using AutoMapper;
+using AutoMapper.QueryableExtensions;
 using LestDate_API.Database;
+using LestDate_API.DTOs;
 using LestDate_API.Entities;
 using LestDate_API.Interfaces;
 using Microsoft.EntityFrameworkCore;
@@ -21,16 +23,20 @@ namespace LestDate_API.Repositories
             _context = context;
         }
 
-        public async Task<AppUser> GetUserByIdAsync(int id)
-        {
-            return await _context.Users.FindAsync(id);
-        }
-
-        public async Task<AppUser> GetUserByUsernameAsync(string username)
+        public async Task<MemberDto> GetUserByIdAsync(int id)
         {
             return await _context.Users
-                //.Include(p => p.Photos)
-                .SingleOrDefaultAsync(x => x.UserName == username);
+                .Where(x => x.Id == id)
+                .ProjectTo<MemberDto>(_mapper.ConfigurationProvider)
+                .SingleOrDefaultAsync();
+        }
+
+        public async Task<MemberDto> GetUserByUsernameAsync(string username)
+        {
+            return await _context.Users
+                .Where(x => x.UserName == username)
+                .ProjectTo<MemberDto>(_mapper.ConfigurationProvider)
+                .SingleOrDefaultAsync();
         }
 
         public async Task<string> GetUserGender(string username)
@@ -40,10 +46,10 @@ namespace LestDate_API.Repositories
                 .Select(x => x.Gender).FirstOrDefaultAsync();
         }
 
-        public async Task<IEnumerable<AppUser>> GetUsersAsync()
+        public async Task<IEnumerable<MemberDto>> GetUsersAsync()
         {
             return await _context.Users
-                //.Include(p => p.Photos)
+                .ProjectTo<MemberDto>(_mapper.ConfigurationProvider)
                 .ToListAsync();
         }
 

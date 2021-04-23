@@ -22,10 +22,5 @@ namespace LestDate_API.Entities
         public ICollection<AppUserRole> UserRoles { get; set; }
         public ICollection<RefreshToken> RefreshTokens { get; set; } = new List<RefreshToken>();
         public ICollection<Photo> Photos { get; set; }
-
-        public int GetAge()
-        {
-            return DateOfBirth.CalculateAge();
-        }
     }
 }
