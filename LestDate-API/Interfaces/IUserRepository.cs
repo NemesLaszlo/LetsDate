@@ -10,9 +10,8 @@ namespace LestDate_API.Interfaces
     public interface IUserRepository
     {
         void Update(AppUser user);
-        Task<IEnumerable<MemberDto>> GetUsersAsync();
-        Task<MemberDto> GetUserByIdAsync(int id);
-        Task<MemberDto> GetUserByUsernameAsync(string username);
+        Task<IEnumerable<MemberDto>> GetMembersAsync();
+        Task<MemberDto> GetMemberAsync(string username);
         Task<string> GetUserGender(string username);
         Task<bool> SaveAllAsync();
     }

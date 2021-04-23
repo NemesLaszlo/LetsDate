@@ -23,15 +23,14 @@ namespace LestDate_API.Repositories
             _context = context;
         }
 
-        public async Task<MemberDto> GetUserByIdAsync(int id)
+        public async Task<IEnumerable<MemberDto>> GetMembersAsync()
         {
             return await _context.Users
-                .Where(x => x.Id == id)
                 .ProjectTo<MemberDto>(_mapper.ConfigurationProvider)
-                .SingleOrDefaultAsync();
+                .ToListAsync();
         }
 
-        public async Task<MemberDto> GetUserByUsernameAsync(string username)
+        public async Task<MemberDto> GetMemberAsync(string username)
         {
             return await _context.Users
                 .Where(x => x.UserName == username)
@@ -44,13 +43,6 @@ namespace LestDate_API.Repositories
             return await _context.Users
                 .Where(x => x.UserName == username)
                 .Select(x => x.Gender).FirstOrDefaultAsync();
-        }
-
-        public async Task<IEnumerable<MemberDto>> GetUsersAsync()
-        {
-            return await _context.Users
-                .ProjectTo<MemberDto>(_mapper.ConfigurationProvider)
-                .ToListAsync();
         }
 
         public async Task<bool> SaveAllAsync()
