@@ -45,7 +45,7 @@ namespace LestDate_API.Services
             var tokenDescriptor = new SecurityTokenDescriptor
             {
                 Subject = new ClaimsIdentity(claims),
-                Expires = DateTime.UtcNow.AddMinutes(10),
+                Expires = DateTime.UtcNow.AddDays(7),
                 SigningCredentials = creds
             };
 
