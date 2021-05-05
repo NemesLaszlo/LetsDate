@@ -13,6 +13,7 @@ namespace LestDate_API.Interfaces
         Task<IEnumerable<MemberDto>> GetMembersAsync();
         Task<MemberDto> GetMemberAsync(string username);
         Task<string> GetUserGender(string username);
+        Task<AppUser> GetUserByUsernameAsync(string username);
         Task<bool> SaveAllAsync();
     }
 }

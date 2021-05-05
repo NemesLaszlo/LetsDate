@@ -20,6 +20,8 @@ namespace LestDate_API.MapperProfiles
             CreateMap<AppUser, MemberDto>()
                 .ForMember(d => d.PhotoUrl, o => o.MapFrom(s => s.Photos.FirstOrDefault(x => x.IsMain).Url)) // d - destination and s - source | (o - "operation")
                 .ForMember(d => d.Age, o => o.MapFrom(s => s.DateOfBirth.CalculateAge()));
+
+            CreateMap<MemberUpdateDto, AppUser>();
         }
     }
 }
