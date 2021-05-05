@@ -2,6 +2,7 @@
 using LestDate_API.Database;
 using LestDate_API.DTOs;
 using LestDate_API.Entities;
+using LestDate_API.Helpers;
 using LestDate_API.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
@@ -33,19 +34,17 @@ namespace LestDate_API.Controllers
             return Ok(users);
         }
 
-        [HttpGet("{username}")]
+        [HttpGet("{username}", Name = "GetUser")]
         public async Task<ActionResult<MemberDto>> GetUser(string username)
         {
-            var user = await _userRepository.GetMemberAsync(username);
-            return Ok(user);
+            return await _userRepository.GetMemberAsync(username);
         }
 
         [HttpPut]
         public async Task<ActionResult> UpdateUser(MemberUpdateDto memberUpdateDto)
         {
-            //var id = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
-            var username = User.FindFirst(ClaimTypes.Name)?.Value;
-            var user = await _userRepository.GetUserByUsernameAsync(username);
+            // get logged in user by name
+            var user = await _userRepository.GetUserByUsernameAsync(User.GetUsername());
 
             _mapper.Map(memberUpdateDto, user);
             _userRepository.Update(user);

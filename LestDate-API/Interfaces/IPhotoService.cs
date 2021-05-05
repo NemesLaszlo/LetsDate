@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace LestDate_API.Interfaces
 {
-    interface IPhotoService
+    public interface IPhotoService
     {
         Task<ImageUploadResult> AddPhoto(IFormFile file);
         Task<DeletionResult> DeletePhoto(string publicId);
