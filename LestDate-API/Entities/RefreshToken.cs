@@ -8,6 +8,7 @@ namespace LestDate_API.Entities
     public class RefreshToken
     {
         public int Id { get; set; }
+        public int AppUserId { get; set; }
         public AppUser AppUser { get; set; }
         public string Token { get; set; }
         public DateTime Expires { get; set; } = DateTime.UtcNow.AddDays(7);

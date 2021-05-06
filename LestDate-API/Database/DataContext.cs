@@ -13,6 +13,7 @@ namespace LestDate_API.Database
     {
         public DataContext(DbContextOptions options) : base(options) { }
 
+        public DbSet<RefreshToken> RefreshTokens { get; set; }
         public DbSet<Photo> Photos { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)

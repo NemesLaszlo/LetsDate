@@ -69,7 +69,7 @@ namespace LestDate_API.Controllers
 
         [AllowAnonymous]
         [HttpPost("register")]
-        public async Task<IActionResult> Register(RegisterDto registerDto)
+        public async Task<ActionResult<UserDto>> Register(RegisterDto registerDto)
         {
             if (!IsValidEmailAddress(registerDto.Email))
             {
@@ -101,7 +101,14 @@ namespace LestDate_API.Controllers
 
             if (!roleResult.Succeeded) return BadRequest(result.Errors);
 
-            return Ok("Registration success");
+            await SetRefreshToken(user);
+            return new UserDto
+            {
+                Username = user.UserName,
+                Token = await _tokenService.CreateToken(user),
+                KnownAs = user.KnownAs,
+                Gender = user.Gender
+            };
         }
 
         [AllowAnonymous]
