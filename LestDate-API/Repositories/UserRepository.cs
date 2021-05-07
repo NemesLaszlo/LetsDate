@@ -28,13 +28,19 @@ namespace LestDate_API.Repositories
         {
             var query = _context.Users.AsQueryable();
 
-            query = query.Where(u => u.UserName != userParams.CurrentUsername);
-            query = query.Where(u => u.Gender == userParams.Gender);
+            query = query.Where(u => u.UserName != userParams.CurrentUsername); // except current user
+            query = query.Where(u => u.Gender == userParams.Gender); // gender
 
             var minDateOfBirth = DateTime.Today.AddYears(-userParams.MaxAge - 1); // -1 today havent had birthbay yet
             var maxDateOfBirth = DateTime.Today.AddYears(-userParams.MinAge);
 
-            query = query.Where(u => u.DateOfBirth >= minDateOfBirth && u.DateOfBirth <= maxDateOfBirth);
+            query = query.Where(u => u.DateOfBirth >= minDateOfBirth && u.DateOfBirth <= maxDateOfBirth); // age filters
+
+            query = userParams.OrderBy switch
+            {
+                "created" => query.OrderByDescending(u => u.Created),
+                _ => query.OrderByDescending(u => u.LastActive)
+            }; // sorting operation, default "lastActive"
 
             return await PagedList<MemberDto>.CreateAsync(
                 query.ProjectTo<MemberDto>(_mapper.ConfigurationProvider).AsNoTracking(), 
