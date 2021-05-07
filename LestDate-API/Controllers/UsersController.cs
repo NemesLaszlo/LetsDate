@@ -31,6 +31,11 @@ namespace LestDate_API.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<MemberDto>>> GetUsers([FromQuery] UserParams userParams)
         {
+            userParams.CurrentUsername = User.GetUsername(); // skip the current user from the list
+
+            var CurrentUserGender = await _userRepository.GetUserGender(User.GetUsername());
+            if(string.IsNullOrEmpty(userParams.Gender)) userParams.Gender = CurrentUserGender == "male" ? "female" : "male"; // set the opposite gender
+
             var users = await _userRepository.GetMembersAsync(userParams);
 
             Response.AddPaginationHeader(users.CurrentPage, users.PageSize, users.TotalCount, users.TotalPages);
