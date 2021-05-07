@@ -38,6 +38,7 @@ namespace LestDate_API.StartupExtensions
             services.AddScoped<IUserRepository, UserRepository>();
             services.Configure<CloudinarySettings>(config.GetSection("Cloudinary"));
             services.AddScoped<IPhotoService, PhotoService>();
+            services.AddScoped<LogUserActivity>();
 
             services.AddSwaggerGen(c =>
             {
