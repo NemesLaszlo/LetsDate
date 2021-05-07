@@ -69,6 +69,11 @@ namespace LestDate_API.Repositories
             return await _context.SaveChangesAsync() > 0;
         }
 
+        public async Task<AppUser> GetUserByIdAsync(int id)
+        {
+            return await _context.Users.FindAsync(id);
+        }
+
         public async Task<AppUser> GetUserByUsernameAsync(string username)
         {
             return await _context.Users
