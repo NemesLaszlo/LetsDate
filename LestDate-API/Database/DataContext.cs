@@ -15,6 +15,7 @@ namespace LestDate_API.Database
 
         public DbSet<RefreshToken> RefreshTokens { get; set; }
         public DbSet<Photo> Photos { get; set; }
+        public DbSet<UserLike> Likes { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
@@ -31,6 +32,21 @@ namespace LestDate_API.Database
                 .WithOne(u => u.Role)
                 .HasForeignKey(ur => ur.RoleId)
                 .IsRequired();
+
+
+            builder.Entity<UserLike>().HasKey(k => new { k.SourceUserId, k.LikedUserId });
+
+            builder.Entity<UserLike>()
+                .HasOne(s => s.SourceUser)
+                .WithMany(l => l.LikedUsers)
+                .HasForeignKey(s => s.SourceUserId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            builder.Entity<UserLike>()
+                .HasOne(s => s.LikedUser)
+                .WithMany(l => l.LikedByUsers)
+                .HasForeignKey(s => s.LikedUserId)
+                .OnDelete(DeleteBehavior.Restrict);
         }
 
     }

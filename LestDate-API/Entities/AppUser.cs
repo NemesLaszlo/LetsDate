@@ -22,5 +22,7 @@ namespace LestDate_API.Entities
         public ICollection<AppUserRole> UserRoles { get; set; }
         public ICollection<RefreshToken> RefreshTokens { get; set; } = new List<RefreshToken>();
         public ICollection<Photo> Photos { get; set; }
+        public ICollection<UserLike> LikedByUsers { get; set; } // They liked the currently logged in user
+        public ICollection<UserLike> LikedUsers { get; set; } // The logged in user liked them
     }
 }
