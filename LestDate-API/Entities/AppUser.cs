@@ -24,5 +24,7 @@ namespace LestDate_API.Entities
         public ICollection<Photo> Photos { get; set; }
         public ICollection<UserLike> LikedByUsers { get; set; } // They liked the currently logged in user
         public ICollection<UserLike> LikedUsers { get; set; } // The logged in user liked them
+        public ICollection<Message> MessagesSent { get; set; }
+        public ICollection<Message> MessagesReceived { get; set; }
     }
 }
