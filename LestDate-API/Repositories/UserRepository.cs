@@ -42,8 +42,10 @@ namespace LestDate_API.Repositories
                 _ => query.OrderByDescending(u => u.LastActive)
             }; // sorting operation, default "lastActive"
 
+            var members = query.ProjectTo<MemberDto>(_mapper.ConfigurationProvider).AsNoTracking();
+
             return await PagedList<MemberDto>.CreateAsync(
-                query.ProjectTo<MemberDto>(_mapper.ConfigurationProvider).AsNoTracking(), 
+                members,
                 userParams.PageNumber, 
                 userParams.PageSize
             ); 
