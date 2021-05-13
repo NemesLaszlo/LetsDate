@@ -60,7 +60,7 @@ namespace LestDate_API.Controllers
 
             var message = await _messageRepository.GetMessage(id);
 
-            if (message.Sender.UserName != username) return Unauthorized();
+            if (message.Sender.UserName != username && message.Recipient.UserName != username) return Unauthorized();
 
             if (message.Sender.UserName == username) message.SenderDeleted = true;
 
