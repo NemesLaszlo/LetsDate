@@ -29,6 +29,7 @@ namespace LestDate_API.StartupExtensions
                     policy
                         .AllowAnyMethod()
                         .AllowAnyHeader()
+                        .AllowCredentials()
                         .WithOrigins("http://localhost:4200");
                 });
             });
@@ -41,6 +42,7 @@ namespace LestDate_API.StartupExtensions
             services.AddScoped<LogUserActivity>();
             services.AddScoped<ILikesRepository, LikesRepository>();
             services.AddScoped<IMessageRepository, MessageRepository>();
+            services.AddSignalR();
 
             services.AddSwaggerGen(c =>
             {

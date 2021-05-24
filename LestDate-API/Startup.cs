@@ -1,4 +1,5 @@
 using LestDate_API.MIddlewares;
+using LestDate_API.SignalR;
 using LestDate_API.StartupExtensions;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
@@ -55,6 +56,7 @@ namespace LestDate_API
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
+                endpoints.MapHub<PresenceHub>("hubs/presence");
             });
         }
     }
