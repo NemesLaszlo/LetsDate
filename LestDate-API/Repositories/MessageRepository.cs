@@ -118,7 +118,7 @@ namespace LestDate_API.Repositories
             {
                 foreach (var message in unreadMessages)
                 {
-                    message.DateRead = DateTime.Now;
+                    message.DateRead = DateTime.UtcNow;
                 }
 
                 await _context.SaveChangesAsync();
