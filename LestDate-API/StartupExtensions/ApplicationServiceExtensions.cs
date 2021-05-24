@@ -4,6 +4,7 @@ using LestDate_API.Interfaces;
 using LestDate_API.MapperProfiles;
 using LestDate_API.Repositories;
 using LestDate_API.Services;
+using LestDate_API.SignalR;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -43,6 +44,7 @@ namespace LestDate_API.StartupExtensions
             services.AddScoped<ILikesRepository, LikesRepository>();
             services.AddScoped<IMessageRepository, MessageRepository>();
             services.AddSignalR();
+            services.AddSingleton<PresenceTracker>(); // (Our) SignalR Presence Tracker Service
 
             services.AddSwaggerGen(c =>
             {
