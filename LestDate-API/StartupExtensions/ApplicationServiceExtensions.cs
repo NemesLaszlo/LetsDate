@@ -37,14 +37,15 @@ namespace LestDate_API.StartupExtensions
 
             services.AddAutoMapper(typeof(AutoMapperProfiles).Assembly);
             services.AddScoped<ITokenService, TokenService>(); // http request lifetime - alived (scoped)
-            services.AddScoped<IUserRepository, UserRepository>();
+            // services.AddScoped<IUserRepository, UserRepository>();
             services.Configure<CloudinarySettings>(config.GetSection("Cloudinary"));
             services.AddScoped<IPhotoService, PhotoService>();
             services.AddScoped<LogUserActivity>();
-            services.AddScoped<ILikesRepository, LikesRepository>();
-            services.AddScoped<IMessageRepository, MessageRepository>();
+            // services.AddScoped<ILikesRepository, LikesRepository>();
+            // services.AddScoped<IMessageRepository, MessageRepository>();
             services.AddSignalR();
             services.AddSingleton<PresenceTracker>(); // (Our) SignalR Presence Tracker Service
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
 
             services.AddSwaggerGen(c =>
             {

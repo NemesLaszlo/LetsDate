@@ -121,16 +121,11 @@ namespace LestDate_API.Repositories
                     message.DateRead = DateTime.UtcNow;
                 }
 
-                await _context.SaveChangesAsync();
+                // await _context.SaveChangesAsync();
             }
 
             // IEnumerable - This works for read-only access to a collection that implements that IEnumerable can be used with a foreach statement.
             return _mapper.Map<IEnumerable<MessageDto>>(messages);
-        }
-
-        public async Task<bool> SaveAllAsync()
-        {
-            return await _context.SaveChangesAsync() > 0;
         }
     }
 }

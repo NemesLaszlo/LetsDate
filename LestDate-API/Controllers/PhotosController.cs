@@ -14,13 +14,13 @@ namespace LestDate_API.Controllers
 {
     public class PhotosController : BaseApiController
     {
-        private readonly IUserRepository _userRepository;
+        private readonly IUnitOfWork _unitOfWork;
         private readonly IPhotoService _photoService;
         private readonly IMapper _mapper;
 
-        public PhotosController(IUserRepository userRepository, IPhotoService photoService, IMapper mapper)
+        public PhotosController(IUnitOfWork unitOfWork, IPhotoService photoService, IMapper mapper)
         {
-            _userRepository = userRepository;
+            _unitOfWork = unitOfWork;
             _photoService = photoService;
             _mapper = mapper;
         }
@@ -28,7 +28,7 @@ namespace LestDate_API.Controllers
         [HttpPost]
         public async Task<ActionResult<PhotoDto>> Upload([FromForm] IFormFile file)
         {
-            var user = await _userRepository.GetUserByUsernameAsync(User.GetUsername());
+            var user = await _unitOfWork.UserRepository.GetUserByUsernameAsync(User.GetUsername());
 
             var result = await _photoService.AddPhoto(file);
 
@@ -47,7 +47,7 @@ namespace LestDate_API.Controllers
 
             user.Photos.Add(photo);
 
-            if (await _userRepository.SaveAllAsync())
+            if (await _unitOfWork.Complete())
             {
                 // With Location header and 201 created status instead of 200 ok
                 return CreatedAtRoute("GetUser", new { username = user.UserName }, _mapper.Map<PhotoDto>(photo));
@@ -59,7 +59,7 @@ namespace LestDate_API.Controllers
         [HttpDelete("{photoId}")]
         public async Task<IActionResult> Delete(int photoId)
         {
-            var user = await _userRepository.GetUserByUsernameAsync(User.GetUsername());
+            var user = await _unitOfWork.UserRepository.GetUserByUsernameAsync(User.GetUsername());
 
             var photo = user.Photos.FirstOrDefault(x => x.Id == photoId);
 
@@ -75,7 +75,7 @@ namespace LestDate_API.Controllers
 
             user.Photos.Remove(photo);
 
-            if (await _userRepository.SaveAllAsync()) return Ok();
+            if (await _unitOfWork.Complete()) return Ok();
 
             return BadRequest("Failed to delete the photo");
         }
@@ -83,7 +83,7 @@ namespace LestDate_API.Controllers
         [HttpPut("{photoId}/setMain")]
         public async Task<IActionResult> SetMain(int photoId)
         {
-            var user = await _userRepository.GetUserByUsernameAsync(User.GetUsername());
+            var user = await _unitOfWork.UserRepository.GetUserByUsernameAsync(User.GetUsername());
 
             var photo = user.Photos.FirstOrDefault(x => x.Id == photoId);
 
@@ -93,7 +93,7 @@ namespace LestDate_API.Controllers
             if (currentMain != null) currentMain.IsMain = false;
             photo.IsMain = true;
 
-            if (await _userRepository.SaveAllAsync()) return NoContent();
+            if (await _unitOfWork.Complete()) return NoContent();
 
             return BadRequest("Failed to set main photo");
         }

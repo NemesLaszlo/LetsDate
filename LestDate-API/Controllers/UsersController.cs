@@ -19,12 +19,12 @@ namespace LestDate_API.Controllers
 {
     public class UsersController : BaseApiController
     {
-        private readonly IUserRepository _userRepository;
+        private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
 
-        public UsersController(IUserRepository userRepository, IMapper mapper)
+        public UsersController(IUnitOfWork unitOfWork, IMapper mapper)
         {
-            _userRepository = userRepository;
+            _unitOfWork = unitOfWork;
             _mapper = mapper;
         }
 
@@ -33,10 +33,10 @@ namespace LestDate_API.Controllers
         {
             userParams.CurrentUsername = User.GetUsername(); // skip the current user from the list
 
-            var CurrentUserGender = await _userRepository.GetUserGender(User.GetUsername());
+            var CurrentUserGender = await _unitOfWork.UserRepository.GetUserGender(User.GetUsername());
             if(string.IsNullOrEmpty(userParams.Gender)) userParams.Gender = CurrentUserGender == "male" ? "female" : "male"; // set the opposite gender
 
-            var users = await _userRepository.GetMembersAsync(userParams);
+            var users = await _unitOfWork.UserRepository.GetMembersAsync(userParams);
 
             Response.AddPaginationHeader(users.CurrentPage, users.PageSize, users.TotalCount, users.TotalPages);
 
@@ -46,19 +46,19 @@ namespace LestDate_API.Controllers
         [HttpGet("{username}", Name = "GetUser")]
         public async Task<ActionResult<MemberDto>> GetUser(string username)
         {
-            return await _userRepository.GetMemberAsync(username);
+            return await _unitOfWork.UserRepository.GetMemberAsync(username);
         }
 
         [HttpPut]
         public async Task<ActionResult> UpdateUser(MemberUpdateDto memberUpdateDto)
         {
             // get logged in user by name
-            var user = await _userRepository.GetUserByUsernameAsync(User.GetUsername());
+            var user = await _unitOfWork.UserRepository.GetUserByUsernameAsync(User.GetUsername());
 
             _mapper.Map(memberUpdateDto, user);
-            _userRepository.Update(user);
+            _unitOfWork.UserRepository.Update(user);
 
-            if (await _userRepository.SaveAllAsync()) return NoContent();
+            if (await _unitOfWork.Complete()) return NoContent();
 
             return BadRequest("Failed to update user");
         }
