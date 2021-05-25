@@ -53,6 +53,12 @@ export class PresenceService {
       this.onlineUsersSource.next(usernames);
     })
 
+    this.hubConnection.on('NewMessageReceived', ({username, knownAs}) => {
+      this.toastr
+        .info(knownAs + ' has sent you a new message!').onTap
+        .pipe(take(1))
+        .subscribe(() => this.router.navigateByUrl('/members/' + username + '?tab=3'));
+    })
 
   }
 }
