@@ -80,25 +80,24 @@ namespace LestDate_API.Repositories
         {
             var query = _context.Messages
                 .OrderByDescending(m => m.MessageSent)
+                .ProjectTo<MessageDto>(_mapper.ConfigurationProvider)
                 .AsQueryable();
 
             query = messageParams.Container switch
             {
-                "Inbox" => query.Where(u => u.Recipient.UserName == messageParams.Username && u.RecipientDeleted == false),
-                "Outbox" => query.Where(u => u.Sender.UserName == messageParams.Username && u.SenderDeleted == false),
-                _ => query.Where(u => u.Recipient.UserName == messageParams.Username && u.RecipientDeleted == false && u.DateRead == null)
+                "Inbox" => query.Where(u => u.RecipientUsername == messageParams.Username && u.RecipientDeleted == false),
+                "Outbox" => query.Where(u => u.SenderUsername == messageParams.Username && u.SenderDeleted == false),
+                _ => query.Where(u => u.RecipientUsername == messageParams.Username && u.RecipientDeleted == false && u.DateRead == null)
             }; // default user unread messages
 
-            var messages = query.ProjectTo<MessageDto>(_mapper.ConfigurationProvider);
-
             return await PagedList<MessageDto>.CreateAsync(
-                messages, 
+                query, 
                 messageParams.PageNumber, 
                 messageParams.PageSize
             );
         }
 
-        public async Task<IEnumerable<MessageDto>> GetMessageThread(string currentUsername, string recipientUsername)
+        /*public async Task<IEnumerable<MessageDto>> GetMessageThread(string currentUsername, string recipientUsername)
         {
             // Message conversation between two users
             var messages = await _context.Messages
@@ -126,6 +125,23 @@ namespace LestDate_API.Repositories
 
             // IEnumerable - This works for read-only access to a collection that implements that IEnumerable can be used with a foreach statement.
             return _mapper.Map<IEnumerable<MessageDto>>(messages);
+        }*/
+
+        public async Task<IEnumerable<MessageDto>> GetMessageThread(string currentUsername, string recipientUsername)
+        {
+            // Message conversation between two users
+            var messages = await _context.Messages
+                .Where(m => m.Recipient.UserName == currentUsername && m.RecipientDeleted == false
+                            && m.Sender.UserName == recipientUsername
+                            || m.Recipient.UserName == recipientUsername
+                            && m.Sender.UserName == currentUsername && m.SenderDeleted == false
+                )
+                .MarkUnreadAsRead(currentUsername)
+                .OrderBy(m => m.MessageSent)
+                .ProjectTo<MessageDto>(_mapper.ConfigurationProvider)
+                .ToListAsync();
+
+            return messages;
         }
     }
 }
