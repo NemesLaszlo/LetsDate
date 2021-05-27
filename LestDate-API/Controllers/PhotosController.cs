@@ -40,10 +40,10 @@ namespace LestDate_API.Controllers
                 PublicId = result.PublicId
             };
 
-            if (user.Photos.Count == 0)
+            /*if (user.Photos.Count == 0)
             {
                 photo.IsMain = true;
-            }
+            }*/
 
             user.Photos.Add(photo);
 
@@ -59,7 +59,13 @@ namespace LestDate_API.Controllers
         [HttpDelete("{photoId}")]
         public async Task<IActionResult> Delete(int photoId)
         {
-            var user = await _unitOfWork.UserRepository.GetUserByUsernameAsync(User.GetUsername());
+            var loggedInUserName = User.GetUsername();
+
+            var user = await _unitOfWork.UserRepository.GetUserByPhotoId(photoId);
+
+            if (user == null) return NotFound("Cannot find user with that photo id");
+
+            if (!loggedInUserName.Equals(user.UserName)) return Forbid();
 
             var photo = user.Photos.FirstOrDefault(x => x.Id == photoId);
 

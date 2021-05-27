@@ -1,0 +1,923 @@
+{
+	"info": {
+		"_postman_id": "78a18bd6-e634-4293-8d05-d7d3b9a98af4",
+		"name": "LetsDate",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Account",
+			"item": [
+				{
+					"name": "User Login /api/account/login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"email\": \"lisa@letsdate.com\",\r\n  \"password\": \"Pa$$w0rd\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:5001/api/account/login",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "5001",
+							"path": [
+								"api",
+								"account",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "User Registration /api/account/register",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"username\": \"Laszlo\",\r\n  \"email\": \"laszlo@letsdate.com\",\r\n  \"knownAs\": \"Testing\",\r\n  \"gender\": \"Male\",\r\n  \"dateOfBirth\": \"1996-07-26\",\r\n  \"city\": \"Miskolc\",\r\n  \"country\": \"Borsod\",\r\n  \"password\": \"Pa$$w0rd\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:5001/api/account/register",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "5001",
+							"path": [
+								"api",
+								"account",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "User RefreshToken /api/account/refreshToken",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOlsiNyIsIjciXSwidW5pcXVlX25hbWUiOlsibGFzemxvIiwibGFzemxvIl0sImVtYWlsIjoibGFzemxvQGxldHNkYXRlLmNvbSIsInJvbGUiOiJNZW1iZXIiLCJuYmYiOjE2MTg5MjE5NzAsImV4cCI6MTYxODkyMjU3MCwiaWF0IjoxNjE4OTIxOTcwfQ.CK_JyS8eC_2sAo6hBbT1U8MVnbj_bGlbg5_hxmuyWKrYzzoYXNv5Cx2Lj9CghcjvxA7MDku8TqpWHcuc8dD0gQ",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://localhost:5001/api/account/refreshToken",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "5001",
+							"path": [
+								"api",
+								"account",
+								"refreshToken"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET Current User /api/account",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOlsiMTkiLCIxOSJdLCJ1bmlxdWVfbmFtZSI6WyJsaXNhIiwibGlzYSJdLCJlbWFpbCI6Imxpc2FAbGV0c2RhdGUuY29tIiwicm9sZSI6Ik1lbWJlciIsIm5iZiI6MTYxOTE4NjA3NCwiZXhwIjoxNjE5MTg2Njc0LCJpYXQiOjE2MTkxODYwNzR9.GHCuOtH3maoWV_kcCVvNhgqDRDTKkBshag2lYllIu-UdYT2PChAHMa1JS1JZJMzW5-KwoQqzd6ieetfbcz_rQA",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://localhost:5001/api/account",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "5001",
+							"path": [
+								"api",
+								"account"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Users",
+			"item": [
+				{
+					"name": "GET All Users /api/users",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOlsiMSIsIjEiXSwidW5pcXVlX25hbWUiOlsibGlzYSIsImxpc2EiXSwiZW1haWwiOiJsaXNhQGxldHNkYXRlLmNvbSIsInJvbGUiOiJNZW1iZXIiLCJuYmYiOjE2MjA0MDU3MjksImV4cCI6MTYyMTAxMDUyOSwiaWF0IjoxNjIwNDA1NzI5fQ.Ks1Lb2lZ6X0RpCcKOKScFAT-RBufdgzNnWJekPqn210JNhuvoNhP1tnboZ3qA4zuuqq6EOhnidtX-X2Kn00vEw",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://localhost:5001/api/users",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "5001",
+							"path": [
+								"api",
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET pageNumber & pageSize UserParams All Users /api/users",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOlsiMSIsIjEiXSwidW5pcXVlX25hbWUiOlsibGlzYSIsImxpc2EiXSwiZW1haWwiOiJsaXNhQGxldHNkYXRlLmNvbSIsInJvbGUiOiJNZW1iZXIiLCJuYmYiOjE2MjAzODQzMjcsImV4cCI6MTYyMDk4OTEyNywiaWF0IjoxNjIwMzg0MzI3fQ.jnJYehpkqXNM0wN82PLQMEEkMlqi1v0Mhv6dQvJQqmc0hcZ_WPgXhSoSn5awLXFdPp9wIr9i5Z5j9wLpDUQf3A",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://localhost:5001/api/users?pageNumber=1&PageSize=5",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "5001",
+							"path": [
+								"api",
+								"users"
+							],
+							"query": [
+								{
+									"key": "pageNumber",
+									"value": "1"
+								},
+								{
+									"key": "PageSize",
+									"value": "5"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET Gender UserParams All Users /api/users",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOlsiMSIsIjEiXSwidW5pcXVlX25hbWUiOlsibGlzYSIsImxpc2EiXSwiZW1haWwiOiJsaXNhQGxldHNkYXRlLmNvbSIsInJvbGUiOiJNZW1iZXIiLCJuYmYiOjE2MjAzODkzOTksImV4cCI6MTYyMDk5NDE5OSwiaWF0IjoxNjIwMzg5Mzk5fQ.qYCiuZCgmnPZ2VKxlkSs5MxH9oukTaVvI7Ad0qFgMSqBtsSX7DPsEBIdkYlJYczj5R3J339rGtm0XaSswg9uMg",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://localhost:5001/api/users?gender=female",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "5001",
+							"path": [
+								"api",
+								"users"
+							],
+							"query": [
+								{
+									"key": "gender",
+									"value": "female"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET Ages UserParams All Users /api/users",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOlsiMSIsIjEiXSwidW5pcXVlX25hbWUiOlsibGlzYSIsImxpc2EiXSwiZW1haWwiOiJsaXNhQGxldHNkYXRlLmNvbSIsInJvbGUiOiJNZW1iZXIiLCJuYmYiOjE2MjAzOTMyMzMsImV4cCI6MTYyMDk5ODAzMywiaWF0IjoxNjIwMzkzMjMzfQ.3XsbtIjYVitynWMYcdpgRuiHMIvrj7f8E3mzY1lEyDpOgIJvnSARRhdCq64NR8HynvxGFeI0by-u-Ct6Fms0Zw",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://localhost:5001/api/users?minAge=18&maxAge=35",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "5001",
+							"path": [
+								"api",
+								"users"
+							],
+							"query": [
+								{
+									"key": "minAge",
+									"value": "18"
+								},
+								{
+									"key": "maxAge",
+									"value": "35"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET Sorting (created/lastActive) UserParams All Users /api/users",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOlsiMSIsIjEiXSwidW5pcXVlX25hbWUiOlsibGlzYSIsImxpc2EiXSwiZW1haWwiOiJsaXNhQGxldHNkYXRlLmNvbSIsInJvbGUiOiJNZW1iZXIiLCJuYmYiOjE2MjA0MDA4ODMsImV4cCI6MTYyMTAwNTY4MywiaWF0IjoxNjIwNDAwODgzfQ.YXCrZY3VXVO17RLlc9MywBRKmAOQQV4jzkdFc4QpNi6fr2YswnUuZyAPdJato_qlMvAe7TnfMJyxWES8lQWCGQ",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://localhost:5001/api/users?orderBy=created",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "5001",
+							"path": [
+								"api",
+								"users"
+							],
+							"query": [
+								{
+									"key": "orderBy",
+									"value": "created"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET Sorting + Gender UserParams All Users /api/users",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOlsiMSIsIjEiXSwidW5pcXVlX25hbWUiOlsibGlzYSIsImxpc2EiXSwiZW1haWwiOiJsaXNhQGxldHNkYXRlLmNvbSIsInJvbGUiOiJNZW1iZXIiLCJuYmYiOjE2MjA0MDA4ODMsImV4cCI6MTYyMTAwNTY4MywiaWF0IjoxNjIwNDAwODgzfQ.YXCrZY3VXVO17RLlc9MywBRKmAOQQV4jzkdFc4QpNi6fr2YswnUuZyAPdJato_qlMvAe7TnfMJyxWES8lQWCGQ",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://localhost:5001/api/users?orderBy=lastActive&gender=female",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "5001",
+							"path": [
+								"api",
+								"users"
+							],
+							"query": [
+								{
+									"key": "orderBy",
+									"value": "lastActive"
+								},
+								{
+									"key": "gender",
+									"value": "female"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET User By Username /api/users/{username}",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOlsiMSIsIjEiXSwidW5pcXVlX25hbWUiOlsibGlzYSIsImxpc2EiXSwiZW1haWwiOiJsaXNhQGxldHNkYXRlLmNvbSIsInJvbGUiOlsiTWVtYmVyIiwiQWRtaW4iLCJNb2RlcmF0b3IiXSwibmJmIjoxNjIyMTE3MDQ3LCJleHAiOjE2MjI3MjE4NDcsImlhdCI6MTYyMjExNzA0N30.Osn1OQ1vWDbXEyxgTtm1wds8LG10e4YLjQ04MTAvz5ahge-1u9E5YPz2LIR-FaWjEOgrenDw6cKlo8KpQUGgTQ",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://localhost:5001/api/users/lisa",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "5001",
+							"path": [
+								"api",
+								"users",
+								"lisa"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Edit User Profile /api/users (current logged in user)",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOlsiMjQiLCIyNCJdLCJ1bmlxdWVfbmFtZSI6WyJ0b2RkIiwidG9kZCJdLCJlbWFpbCI6InRvZGRAbGV0c2RhdGUuY29tIiwicm9sZSI6Ik1lbWJlciIsIm5iZiI6MTYyMDIyNjI2NiwiZXhwIjoxNjIwODMxMDY2LCJpYXQiOjE2MjAyMjYyNjZ9.E4WxF7iZq09v0QP_1sUEj4MUuGzddxyM_5cfQ--YMAe1MEsIzs3GxKSUJIMMSdr4D2PFIiXxhx5U7jb5mzlpaQ",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"introduction\": \"Updated introduction\",\r\n  \"lookingFor\": \"Updated lookingFor\",\r\n  \"interests\": \"Updated interests\",\r\n  \"city\": \"Updated city\",\r\n  \"country\": \"Updated country\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:5001/api/users",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "5001",
+							"path": [
+								"api",
+								"users"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Users Photo",
+			"item": [
+				{
+					"name": "Upload a Photo /api/photos",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOlsiMSIsIjEiXSwidW5pcXVlX25hbWUiOlsibGlzYSIsImxpc2EiXSwiZW1haWwiOiJsaXNhQGxldHNkYXRlLmNvbSIsInJvbGUiOlsiTWVtYmVyIiwiQWRtaW4iLCJNb2RlcmF0b3IiXSwibmJmIjoxNjIyMTE3NDE1LCJleHAiOjE2MjI3MjIyMTUsImlhdCI6MTYyMjExNzQxNX0.-CkxZCxycPLgW_P78cZCsx2ABvyXDifn0ScqVQs7gKufv0tXPIY2AuOa4FFOwfS0zSpPAh6IY76ggu_wPTAYLA",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "File",
+									"type": "file",
+									"src": "/C:/Users/wowla/Pictures/Saved Pictures/YoloProgrammer.jpg"
+								}
+							]
+						},
+						"url": {
+							"raw": "https://localhost:5001/api/photos",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "5001",
+							"path": [
+								"api",
+								"photos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete a Photo /api/photos/{photo id}",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOlsiMSIsIjEiXSwidW5pcXVlX25hbWUiOlsibGlzYSIsImxpc2EiXSwiZW1haWwiOiJsaXNhQGxldHNkYXRlLmNvbSIsInJvbGUiOlsiTWVtYmVyIiwiQWRtaW4iLCJNb2RlcmF0b3IiXSwibmJmIjoxNjIyMTE4MDM3LCJleHAiOjE2MjI3MjI4MzcsImlhdCI6MTYyMjExODAzN30.ql6v7LdxtcU--9HK4kLWseLqIP0gU3DmKTy315jYzgRaGL3THFv3qJsa3n8F0rOKlJ3-HluircAWgVELCowvnQ",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://localhost:5001/api/photos/14",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "5001",
+							"path": [
+								"api",
+								"photos",
+								"14"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Set Photo to Main  /api/photos/{id}/setmain",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOlsiMTkiLCIxOSJdLCJ1bmlxdWVfbmFtZSI6WyJsaXNhIiwibGlzYSJdLCJlbWFpbCI6Imxpc2FAbGV0c2RhdGUuY29tIiwicm9sZSI6Ik1lbWJlciIsIm5iZiI6MTYyMDI0MDA4MCwiZXhwIjoxNjIwODQ0ODgwLCJpYXQiOjE2MjAyNDAwODB9.XbmJLQJ_DCLlSd2QH5k4oh9gWEFqklzf0hOfSDoPfSNtQHldZ3miAykHKJ_KcglsXynFzShW7QPzo3-kZuFPpg",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://localhost:5001/api/photos/11/setmain",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "5001",
+							"path": [
+								"api",
+								"photos",
+								"11",
+								"setmain"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "User Likes",
+			"item": [
+				{
+					"name": "Like/Unlike a user by name /api/likes/{username}",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOlsiMSIsIjEiXSwidW5pcXVlX25hbWUiOlsibGlzYSIsImxpc2EiXSwiZW1haWwiOiJsaXNhQGxldHNkYXRlLmNvbSIsInJvbGUiOiJNZW1iZXIiLCJuYmYiOjE2MjA0ODE3MjUsImV4cCI6MTYyMTA4NjUyNSwiaWF0IjoxNjIwNDgxNzI1fQ.eGNOFi5JRK_mRDxiUfEQEMKVoqeqYyZQ7qstmbZU1SJumHhDsBf5vH8nrdcaXNlhno643KCel3irt24s2lGs1A",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://localhost:5001/api/likes/todd",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "5001",
+							"path": [
+								"api",
+								"likes",
+								"todd"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET Liked Users",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOlsiMSIsIjEiXSwidW5pcXVlX25hbWUiOlsibGlzYSIsImxpc2EiXSwiZW1haWwiOiJsaXNhQGxldHNkYXRlLmNvbSIsInJvbGUiOiJNZW1iZXIiLCJuYmYiOjE2MjA0ODE3MjUsImV4cCI6MTYyMTA4NjUyNSwiaWF0IjoxNjIwNDgxNzI1fQ.eGNOFi5JRK_mRDxiUfEQEMKVoqeqYyZQ7qstmbZU1SJumHhDsBf5vH8nrdcaXNlhno643KCel3irt24s2lGs1A",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://localhost:5001/api/likes?predicate=liked",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "5001",
+							"path": [
+								"api",
+								"likes"
+							],
+							"query": [
+								{
+									"key": "predicate",
+									"value": "liked"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET Liked Users Liked By",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOlsiMSIsIjEiXSwidW5pcXVlX25hbWUiOlsibGlzYSIsImxpc2EiXSwiZW1haWwiOiJsaXNhQGxldHNkYXRlLmNvbSIsInJvbGUiOiJNZW1iZXIiLCJuYmYiOjE2MjA0ODE3MjUsImV4cCI6MTYyMTA4NjUyNSwiaWF0IjoxNjIwNDgxNzI1fQ.eGNOFi5JRK_mRDxiUfEQEMKVoqeqYyZQ7qstmbZU1SJumHhDsBf5vH8nrdcaXNlhno643KCel3irt24s2lGs1A",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://localhost:5001/api/likes?predicate=likedBy",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "5001",
+							"path": [
+								"api",
+								"likes"
+							],
+							"query": [
+								{
+									"key": "predicate",
+									"value": "likedBy"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "User Messages",
+			"item": [
+				{
+					"name": "Create a message from ... to ...",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOlsiNiIsIjYiXSwidW5pcXVlX25hbWUiOlsidG9kZCIsInRvZGQiXSwiZW1haWwiOiJ0b2RkQGxldHNkYXRlLmNvbSIsInJvbGUiOiJNZW1iZXIiLCJuYmYiOjE2MjA4MzU1MTUsImV4cCI6MTYyMTQ0MDMxNSwiaWF0IjoxNjIwODM1NTE1fQ.c4X3KlX35MLrVtS6NIEfPReanxJw4WOS41EJVvzh-4a3JFb7pAThex0SXVvhXNyj_S7O5hkpvoIe_dV7OfDV5w",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"recipientUsername\": \"lisa\",\r\n  \"content\": \"Test message 1 from Todd to Lisa\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:5001/api/messages",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "5001",
+							"path": [
+								"api",
+								"messages"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Default Messages - Unread messages",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOlsiMSIsIjEiXSwidW5pcXVlX25hbWUiOlsibGlzYSIsImxpc2EiXSwiZW1haWwiOiJsaXNhQGxldHNkYXRlLmNvbSIsInJvbGUiOiJNZW1iZXIiLCJuYmYiOjE2MjA4MzY4MjUsImV4cCI6MTYyMTQ0MTYyNSwiaWF0IjoxNjIwODM2ODI1fQ.F0n4FWeCIiLWPAANLQmGBfGJe1a-tPKPGYnrR7fPrjw9ZxzOUPpWOL0JEj45CX9jtYRdlEh4H6cEFAkzXg5iUw",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://localhost:5001/api/messages",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "5001",
+							"path": [
+								"api",
+								"messages"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "User Outbox Messages",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOlsiMSIsIjEiXSwidW5pcXVlX25hbWUiOlsibGlzYSIsImxpc2EiXSwiZW1haWwiOiJsaXNhQGxldHNkYXRlLmNvbSIsInJvbGUiOiJNZW1iZXIiLCJuYmYiOjE2MjA4MzY4MjUsImV4cCI6MTYyMTQ0MTYyNSwiaWF0IjoxNjIwODM2ODI1fQ.F0n4FWeCIiLWPAANLQmGBfGJe1a-tPKPGYnrR7fPrjw9ZxzOUPpWOL0JEj45CX9jtYRdlEh4H6cEFAkzXg5iUw",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://localhost:5001/api/messages?container=Outbox",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "5001",
+							"path": [
+								"api",
+								"messages"
+							],
+							"query": [
+								{
+									"key": "container",
+									"value": "Outbox"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "User Inbox Messages",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOlsiMSIsIjEiXSwidW5pcXVlX25hbWUiOlsibGlzYSIsImxpc2EiXSwiZW1haWwiOiJsaXNhQGxldHNkYXRlLmNvbSIsInJvbGUiOiJNZW1iZXIiLCJuYmYiOjE2MjA5Mjg1ODgsImV4cCI6MTYyMTUzMzM4OCwiaWF0IjoxNjIwOTI4NTg4fQ.xJKCxLrncEht-kPTX9au7tnKfSuEG-aZs0HaWz74Lb10fJKp71Wh11cTdo4yUvuQ2w0k3tNx656ycsjgMKOq4A",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://localhost:5001/api/messages?container=Inbox",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "5001",
+							"path": [
+								"api",
+								"messages"
+							],
+							"query": [
+								{
+									"key": "container",
+									"value": "Inbox"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Logged in User MessageThread with {username}",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOlsiMSIsIjEiXSwidW5pcXVlX25hbWUiOlsibGlzYSIsImxpc2EiXSwiZW1haWwiOiJsaXNhQGxldHNkYXRlLmNvbSIsInJvbGUiOiJNZW1iZXIiLCJuYmYiOjE2MjA4MzY4MjUsImV4cCI6MTYyMTQ0MTYyNSwiaWF0IjoxNjIwODM2ODI1fQ.F0n4FWeCIiLWPAANLQmGBfGJe1a-tPKPGYnrR7fPrjw9ZxzOUPpWOL0JEj45CX9jtYRdlEh4H6cEFAkzXg5iUw",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://localhost:5001/api/messages/thread/todd",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "5001",
+							"path": [
+								"api",
+								"messages",
+								"thread",
+								"todd"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Message as Sender && Blank it as Recipient",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOlsiMSIsIjEiXSwidW5pcXVlX25hbWUiOlsibGlzYSIsImxpc2EiXSwiZW1haWwiOiJsaXNhQGxldHNkYXRlLmNvbSIsInJvbGUiOiJNZW1iZXIiLCJuYmYiOjE2MjA5Mjg1ODgsImV4cCI6MTYyMTUzMzM4OCwiaWF0IjoxNjIwOTI4NTg4fQ.xJKCxLrncEht-kPTX9au7tnKfSuEG-aZs0HaWz74Lb10fJKp71Wh11cTdo4yUvuQ2w0k3tNx656ycsjgMKOq4A",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://localhost:5001/api/messages/2",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "5001",
+							"path": [
+								"api",
+								"messages",
+								"2"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Admin",
+			"item": [
+				{
+					"name": "Get Roles as Admin",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOlsiMSIsIjEiXSwidW5pcXVlX25hbWUiOlsibGlzYSIsImxpc2EiXSwiZW1haWwiOiJsaXNhQGxldHNkYXRlLmNvbSIsInJvbGUiOlsiTWVtYmVyIiwiQWRtaW4iXSwibmJmIjoxNjIxNzEzODQwLCJleHAiOjE2MjIzMTg2NDAsImlhdCI6MTYyMTcxMzg0MH0.XCZyRn_HPt-xC1BwvvIyOVPMPczF0BPSOUfoewW9ZQVArrRdD1LqYn5YypjH4w3-jHInJ2Fq-BmlGPMOAOFZUg",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://localhost:5001/api/admin/users-with-roles",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "5001",
+							"path": [
+								"api",
+								"admin",
+								"users-with-roles"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Edit Roles edit-roles/{username}",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOlsiMSIsIjEiXSwidW5pcXVlX25hbWUiOlsibGlzYSIsImxpc2EiXSwiZW1haWwiOiJsaXNhQGxldHNkYXRlLmNvbSIsInJvbGUiOlsiTWVtYmVyIiwiQWRtaW4iXSwibmJmIjoxNjIxNzEzODQwLCJleHAiOjE2MjIzMTg2NDAsImlhdCI6MTYyMTcxMzg0MH0.XCZyRn_HPt-xC1BwvvIyOVPMPczF0BPSOUfoewW9ZQVArrRdD1LqYn5YypjH4w3-jHInJ2Fq-BmlGPMOAOFZUg",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://localhost:5001/api/admin/edit-roles/lisa?roles=Moderator,Member",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "5001",
+							"path": [
+								"api",
+								"admin",
+								"edit-roles",
+								"lisa"
+							],
+							"query": [
+								{
+									"key": "roles",
+									"value": "Moderator,Member"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Photos to Moderate (Approve or not)",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOlsiMSIsIjEiXSwidW5pcXVlX25hbWUiOlsibGlzYSIsImxpc2EiXSwiZW1haWwiOiJsaXNhQGxldHNkYXRlLmNvbSIsInJvbGUiOlsiTWVtYmVyIiwiQWRtaW4iLCJNb2RlcmF0b3IiXSwibmJmIjoxNjIyMTE3MDQ3LCJleHAiOjE2MjI3MjE4NDcsImlhdCI6MTYyMjExNzA0N30.Osn1OQ1vWDbXEyxgTtm1wds8LG10e4YLjQ04MTAvz5ahge-1u9E5YPz2LIR-FaWjEOgrenDw6cKlo8KpQUGgTQ",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://localhost:5001/api/admin/photos-to-moderate",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "5001",
+							"path": [
+								"api",
+								"admin",
+								"photos-to-moderate"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Photo Moderate - Approve {photoId}",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOlsiMSIsIjEiXSwidW5pcXVlX25hbWUiOlsibGlzYSIsImxpc2EiXSwiZW1haWwiOiJsaXNhQGxldHNkYXRlLmNvbSIsInJvbGUiOlsiTWVtYmVyIiwiQWRtaW4iXSwibmJmIjoxNjIxNzEzODQwLCJleHAiOjE2MjIzMTg2NDAsImlhdCI6MTYyMTcxMzg0MH0.XCZyRn_HPt-xC1BwvvIyOVPMPczF0BPSOUfoewW9ZQVArrRdD1LqYn5YypjH4w3-jHInJ2Fq-BmlGPMOAOFZUg",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://localhost:5001/api/admin/approve-photo/12",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "5001",
+							"path": [
+								"api",
+								"admin",
+								"approve-photo",
+								"12"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Photo Moderate - Reject {photoId}",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOlsiMSIsIjEiXSwidW5pcXVlX25hbWUiOlsibGlzYSIsImxpc2EiXSwiZW1haWwiOiJsaXNhQGxldHNkYXRlLmNvbSIsInJvbGUiOlsiTWVtYmVyIiwiQWRtaW4iXSwibmJmIjoxNjIxNzEzODQwLCJleHAiOjE2MjIzMTg2NDAsImlhdCI6MTYyMTcxMzg0MH0.XCZyRn_HPt-xC1BwvvIyOVPMPczF0BPSOUfoewW9ZQVArrRdD1LqYn5YypjH4w3-jHInJ2Fq-BmlGPMOAOFZUg",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://localhost:5001/api/admin/reject-photo/13",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "5001",
+							"path": [
+								"api",
+								"admin",
+								"reject-photo",
+								"13"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

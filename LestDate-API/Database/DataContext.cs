@@ -71,6 +71,8 @@ namespace LestDate_API.Database
                 .WithOne()
                 .OnDelete(DeleteBehavior.Cascade);
 
+            builder.Entity<Photo>().HasQueryFilter(p => p.IsApproved);
+
             builder.ApplyUtcDateTimeConverter();
         }
 
