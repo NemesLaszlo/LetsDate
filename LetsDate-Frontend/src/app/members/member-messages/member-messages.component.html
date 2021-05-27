@@ -63,10 +63,11 @@
         />
         <div class="input-group-append">
           <button
-            [disabled]="!messageForm.valid"
+            [disabled]="!messageForm.valid || loading"
             class="btn btn-primary"
             type="submit"
           >
+            <i *ngIf="loading" class="fa fa-spinner fa-spin"></i>
             Send
           </button>
         </div>
